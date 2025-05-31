@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Demo Login QA × IA</title>
+<style>
+  body{font-family:Arial,Helvetica,sans-serif;background:#f5f7fb;display:flex;align-items:center;justify-content:center;height:100vh;margin:0}
+  #container{background:#fff;border-radius:8px;box-shadow:0 4px 12px rgba(0,0,0,.1);padding:30px;width:320px}
+  h2{text-align:center;margin-top:0}
+  label{display:block;margin-bottom:4px;font-weight:600}
+  input{width:100%;padding:8px 10px;margin-bottom:12px;border:1px solid #ccc;border-radius:4px}
+  button{width:100%;padding:10px;border:none;border-radius:4px;background:#0073e6;color:#fff;font-size:15px;cursor:pointer}
+  button:hover{background:#005ac2}
+  #error-msg{color:#c0392b;margin-bottom:12px;display:none}
+  #success-screen{display:none;text-align:center}
+</style>
+</head>
+<body>
+<div id="container">
+  <form id="login-form" data-test="form-login">
+    <h2>Iniciar sesión</h2>
+    <label for="username" data-test="label-user">Usuario</label>
+    <input id="username" data-test="input-user" type="text" placeholder="admin">
+    <label for="password" data-test="label-pass">Contraseña</label>
+    <input id="password" data-test="input-pass" type="password" placeholder="admin">
+    <span id="error-msg" data-test="msg-error">Credenciales incorrectas</span>
+    <button id="btn-login" data-test="btn-login" type="submit">Acceder</button>
+  </form>
+
+  <div id="success-screen" data-test="success">
+    <h2>Éxito ✅</h2>
+    <p>Has iniciado sesión correctamente.</p>
+  </div>
+</div>
+
+<script>
+document.getElementById('login-form').addEventListener('submit', function(e){
+  e.preventDefault();
+  const user = document.getElementById('username').value.trim();
+  const pass = document.getElementById('password').value.trim();
+  const error = document.getElementById('error-msg');
+  if(user === 'admin' && pass === 'admin'){
+    // éxito
+    this.style.display = 'none';
+    document.getElementById('success-screen').style.display = 'block';
+  } else{
+    error.style.display = 'block';
+  }
+});
+</script>
+</body>
+</html>
